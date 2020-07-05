@@ -1,3 +1,6 @@
+// Tiled uses top-down y-coords by default, but my target application uses bottom-up
+const INVERT_Y = true;
+
 tiled.assetSaved.connect((asset) => {
   if (!asset.isTileMap) return;
 
@@ -5,9 +8,9 @@ tiled.assetSaved.connect((asset) => {
   const { width, height } = asset;
   const floor = asset.layerAt(0);
   const blocked = Array.from(Array(height), () => new Array(width));
-  for (var y = 0; y < height; y++) {
-    for (var x = 0; x < width; x++) {
-      blocked[y][x] = floor.cellAt(x, y).empty;
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      blocked[INVERT_Y ? height - 1 - y : y][x] = floor.cellAt(x, y).empty;
     }
   }
 
