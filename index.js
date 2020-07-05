@@ -1,6 +1,3 @@
-const filepath = __filename;
-const filename = FileInfo.baseName(filepath);
-
 tiled.assetSaved.connect((asset) => {
   if (!asset.isTileMap) return;
 
